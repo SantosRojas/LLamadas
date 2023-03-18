@@ -150,6 +150,7 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyItemInserted(0)
                 binding.lyNameContact.visibility = View.GONE
                 binding.lyPhoneNumber.visibility = View.GONE
+                binding.btnAddPhoto.setText(getString(R.string.add_contact))
 
             }
 
@@ -176,7 +177,7 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.apply {
-            setTitle(getString(R.string.confirm_delete) + " " + photoList[position].namePhoto.replace("."," "))
+            setTitle(getString(R.string.confirm_delete) + " " + photoList[position].namePhoto.replace("."," ")+"?")
             setPositiveButton(R.string.yes) { _, _ ->
                 File(photoList[position].photo).delete()
                 photoList.removeAt(position)
