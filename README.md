@@ -1,8 +1,7 @@
 # LLamadas
 Aplicacion de llamadas para personas que no sepan leer
 
-# Install
-[url](https://drive.google.com/file/d/1LcLGbDrZOPvDnA17v7w4iecQDhrKO1Yu/view?usp=share_link)
+# Install: [url](https://drive.google.com/file/d/1LcLGbDrZOPvDnA17v7w4iecQDhrKO1Yu/view?usp=share_link)
 
 # Manual de uso
 Al iniciar la aplicacion te va pedir que  agregeues contactos.
