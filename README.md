@@ -4,6 +4,7 @@ Aplicacion de llamadas para personas que no sepan leer
 # Install: [url](https://drive.google.com/file/d/1LcLGbDrZOPvDnA17v7w4iecQDhrKO1Yu/view?usp=share_link)
 
 # Manual de uso
+La configuracion inicial la debe hacer alguien que sepa leer ya que requiere ingresar algunos datos tales como numero de celular y el nombre de los contactos.
 Al iniciar la aplicacion te va pedir que  agregeues contactos.
 
 $$[![image1.jpg](https://i.postimg.cc/nVDPdZhB/image1.jpg)](https://postimg.cc/4nXPdDtx)$$
@@ -23,4 +24,5 @@ Luego de tomar la foto se te muestra una vista donde puedes visualizar el contac
 Para realizar la llamada solo debes pulsar la imagen del contacto.
 
 [![image5.jpg](https://i.postimg.cc/d03WGcf7/image5.jpg)](https://postimg.cc/PLGzk9Th)
+
 
