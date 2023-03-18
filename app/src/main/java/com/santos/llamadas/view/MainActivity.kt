@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyItemInserted(0)
                 binding.lyNameContact.visibility = View.GONE
                 binding.lyPhoneNumber.visibility = View.GONE
-                binding.btnAddPhoto.setText(getString(R.string.add_contact))
+                binding.btnAddPhoto.text = getString(R.string.add_contact)
 
             }
 
