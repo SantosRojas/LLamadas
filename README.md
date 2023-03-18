@@ -23,6 +23,6 @@ Luego de tomar la foto se te muestra una vista donde puedes visualizar el contac
 
 Para realizar la llamada solo debes pulsar la imagen del contacto.
 
-[![image5.jpg](https://i.postimg.cc/d03WGcf7/image5.jpg)](https://postimg.cc/PLGzk9Th)
+[![imagn.jpg](https://i.postimg.cc/Xv050RMZ/imagn.jpg)](https://postimg.cc/rDQs1Ywc)
 
 
