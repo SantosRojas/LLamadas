@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
 
         binding.btnAddPhoto.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            binding.cvEmptyContacts.visibility = View.GONE
+            binding.rvPhotos.visibility = View.VISIBLE
 
             if (binding.lyNameContact.visibility == View.GONE) {
                 binding.lyNameContact.visibility = View.VISIBLE
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                         setHelperTextColor(getColorStateList(R.color.red))
                     }
                 } else {
+                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     var fileImage: File? = null
                     try {
                         fileImage = createImage()
@@ -108,6 +110,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun getPhotosData() {
         if (files.listFiles()?.isNotEmpty() == true) {
+            binding.cvEmptyContacts.visibility = View.GONE
+            binding.rvPhotos.visibility = View.VISIBLE
             println(">>>>>>")
             println("ENTRANDO AL BUCLE")
             println(">>>>>>")

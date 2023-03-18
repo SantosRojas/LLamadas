@@ -8,4 +8,5 @@
     <string name="require">Campo obligatorio</string>
     <string name="cancel">Cancelar</string>
     <string name="make_photo">Tomar foto</string>
+    <string name="empty_contacts">Aun no tienes contactos, agrega uno  para continuar</string>
 </resources>
