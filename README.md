@@ -7,7 +7,7 @@ Aplicacion de llamadas para personas que no sepan leer
 La configuracion inicial la debe hacer alguien que sepa leer ya que requiere ingresar algunos datos tales como numero de celular y el nombre de los contactos.
 Al iniciar la aplicacion te va pedir que  agregeues contactos.
 
-$[![image1.jpg](https://i.postimg.cc/nVDPdZhB/image1.jpg)](https://postimg.cc/4nXPdDtx)
+[![image1.jpg](https://i.postimg.cc/nVDPdZhB/image1.jpg)](https://postimg.cc/4nXPdDtx)
 
 Luego de pulsar el boton añadir contactos te aparecera la sigueinte vista
 
