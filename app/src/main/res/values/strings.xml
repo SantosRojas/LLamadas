@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Llamadas</string>
+    <string name="name_conctact">Nombre del contacto</string>
+    <string name="add_contact">Agregar contacto</string>
+    <string name="confirm_delete">Estas segur@ de eliminar a</string>
+    <string name="yes">Si</string>
+    <string name="phone_number">Numero de celular</string>
+    <string name="require">Campo obligatorio</string>
+    <string name="cancel">Cancelar</string>
+    <string name="make_photo">Tomar foto</string>
+</resources>
