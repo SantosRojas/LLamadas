@@ -19,10 +19,10 @@ Donde deberas llenar los datos requeridos y luego pulsar el boton "TOMAR FOTO". 
 
 Luego de tomar la foto se te muestra una vista donde puedes visualizar el contacto agregado.
 
-[![image4.jpg](https://i.postimg.cc/bNfFWMZM/image4.jpg)](https://postimg.cc/Z0jcywFF)
+[![imagn.jpg](https://i.postimg.cc/Xv050RMZ/imagn.jpg)](https://postimg.cc/rDQs1Ywc)
 
 Para realizar la llamada solo debes pulsar la imagen del contacto.
 
-[![imagn.jpg](https://i.postimg.cc/Xv050RMZ/imagn.jpg)](https://postimg.cc/rDQs1Ywc)
+[![image5.jpg](https://i.postimg.cc/d03WGcf7/image5.jpg)](https://postimg.cc/PLGzk9Th)
 
 
