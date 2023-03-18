@@ -5,17 +5,17 @@ Install: url
 
 # Manual de uso
 Al iniciar la aplicacion te va pedir que  agregeues contactos.
-[url=https://postimg.cc/4nXPdDtx][img]https://i.postimg.cc/4nXPdDtx/image1.jpg[/img][/url]
+[![image1.jpg](https://i.postimg.cc/nVDPdZhB/image1.jpg)](https://postimg.cc/4nXPdDtx)
 
 Luego de pulsar el boton añadir contactos te aparecera la sigueinte vista
-[url=https://postimg.cc/ykdTh0Lq][img]https://i.postimg.cc/ykdTh0Lq/image2.jpg[/img][/url]
+[![image2.jpg](https://i.postimg.cc/L6k0pTfs/image2.jpg)](https://postimg.cc/ykdTh0Lq)
 
 Donde deberasr los datos requeridos y luego pulsar el boton "TOIAR FOTO". La primera vez te pedira permisos de uso de la camara.
-[url=https://postimg.cc/K13rwxXJ][img]https://i.postimg.cc/K13rwxXJ/image3.jpg[/img][/url]
+[![image3.jpg](https://i.postimg.cc/NjpJyjdq/image3.jpg)](https://postimg.cc/K13rwxXJ)
 
 Luego de tomar la foto se te mostrara una vista donde puedes visualizar el contacto agregado.
-[url=https://postimg.cc/Z0jcywFF][img]https://i.postimg.cc/Z0jcywFF/image4.jpg[/img][/url]
+[![image4.jpg](https://i.postimg.cc/bNfFWMZM/image4.jpg)](https://postimg.cc/Z0jcywFF)
 
 Para realizar la llamada solo debes pulsar la imagen del contacto.
-[url=https://postimg.cc/PLGzk9Th][img]https://i.postimg.cc/PLGzk9Th/image5.jpg[/img][/url]
+[![image5.jpg](https://i.postimg.cc/d03WGcf7/image5.jpg)](https://postimg.cc/PLGzk9Th)
 
