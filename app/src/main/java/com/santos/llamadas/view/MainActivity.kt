@@ -22,6 +22,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -77,9 +78,9 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
 
         builder.apply {
-            setTitle("¿Desea importar contactos o registrar nuevo contacto manualmente?")
+            setTitle("¿Importar de contactos o hacerlo manualmente?")
             setPositiveButton(R.string.importar) { _, _ ->
-                importContacts()
+                checkPermissionsContacts()
             }
             setNegativeButton(R.string.manual) { _, _ ->
                 manualFill()
@@ -100,7 +101,7 @@ class MainActivity : AppCompatActivity() {
                 setHelperTextColor(getColorStateList(R.color.red))
             }
         } else {
-            tomarFoto()
+            makePhoto()
         }
     }
 
@@ -114,19 +115,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun importContacts() {
+
         Toast.makeText(this,"IMPORTANDO CONTACTOS",Toast.LENGTH_LONG).show()
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
         startForResultContacts.launch(intent)
     }
 
+    private fun checkPermissionsContacts(){
+        if (ActivityCompat.checkSelfPermission(this,Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
+            importContacts()
+        }
+        else{
+            requestPermissionContacts.launch(Manifest.permission.READ_CONTACTS)
+            //ActivityCompat.requestPermissions(this,Array(1){Manifest.permission.READ_CONTACTS},111)
+        }
+    }
+
+    private val requestPermissionContacts= registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ){isGranted ->
+        if (isGranted){
+            importContacts()
+        }else{
+            Toast.makeText(this,"Necesitas aceptar los permisos para hacer uso de la aplicacion",Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun getPhotosData() {
         if (files.listFiles()?.isNotEmpty() == true) {
             binding.cvEmptyContacts.visibility = View.GONE
             binding.rvPhotos.visibility = View.VISIBLE
-            println(">>>>>>")
-            println("ENTRANDO AL BUCLE")
-            println(">>>>>>")
+
             for (f in files.listFiles()!!) {
                 nameFile = (f.toString()).split("/").lastOrNull()
                 numberFile = nameFile.toString().split("_")[0]
@@ -146,28 +166,21 @@ class MainActivity : AppCompatActivity() {
 
     private val startForResultContacts = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == Activity.RESULT_OK){
-            println("1111111111111111111111111")
-            println("1111111111111111111111111")
             val data = it.data?.data
             val cursor: Cursor? = contentResolver.query(data!!,null,null,null,null)
 
             if (cursor != null) {
                 if (cursor.moveToFirst()){
-                    println(">>>>>>>>>>>>>>>>>>>>>>>>")
-                    println(">>>>>>>>>>>>>>>>>>>>>>>>")
                     val columnName = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
                     val columnNumber = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
                     nameContact = cursor.getString(columnName)
                     phoneNumber= cursor.getString(columnNumber)
                     printData()
 
-                    println(nameContact)
-                    println(phoneNumber)
                 }
             }
             else{
-                println("El cursor es vacio")
-                println("<<<<<<<<<<<<<<<<<<<")
+                Toast.makeText(this,"A ocurrido un error al importar el contacto de $nameContact",Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -192,7 +205,7 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-    private fun tomarFoto() {
+    private fun makePhoto() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         var fileImage: File? = null
         try {
