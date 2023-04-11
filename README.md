@@ -14,6 +14,7 @@ Luego de pulsar el boton añadir contactos te aparecera la sigueinte vista, dond
 [![pregunta.jpg](https://i.postimg.cc/Jn67vgLF/pregunta.jpg)](https://postimg.cc/zbh1Rx3w)
 
 Si eliges importar luego de aceptar los permisos se te abrirá la aplicacion contactos, donde podras seleccionar el contacto deseado.
+
 [![contacts.jpg](https://i.postimg.cc/66HJVnWM/contacts.jpg)](https://postimg.cc/pyn6R9nj)
 
 Una vez elegido el contacto podras ver los datos del mismo.
