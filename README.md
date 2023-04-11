@@ -1,7 +1,7 @@
 # LLamadas
 Aplicacion de llamadas para personas que no sepan leer
 
-# Install: [Llamadas.apk](https://github.com/SantosRojas/LLamadas/releases/download/v2.0/app-release.apk)
+# Install: [Llamadas.apk](https://github.com/SantosRojas/LLamadas/releases/download/v2.0/Llamadas.apk)
 
 # Manual de uso
 La configuracion inicial la debe hacer alguien que sepa leer ya que requiere ingresar algunos datos tales como numero de celular y el nombre de los contactos.
