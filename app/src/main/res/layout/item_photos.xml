@@ -10,6 +10,7 @@
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/ivPhoto"
+            android:contentDescription="@string/image_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -20,8 +21,9 @@
             android:id="@+id/btnSelected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:background="@color/transparent"
+            android:contentDescription="@string/delete"
             android:minWidth="48dp"
             android:minHeight="48dp"
             android:padding="8dp"

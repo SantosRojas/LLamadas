@@ -6,11 +6,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.view.Surface
@@ -20,6 +21,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -63,50 +65,60 @@ class MainActivity : AppCompatActivity() {
             binding.cvEmptyContacts.visibility = View.GONE
             binding.rvPhotos.visibility = View.VISIBLE
 
-            if (binding.lyNameContact.visibility == View.GONE) {
-                binding.lyNameContact.visibility = View.VISIBLE
-                binding.lyPhoneNumber.visibility = View.VISIBLE
-                binding.etNameContact.setText("")
-                binding.etPhoneNumber.setText("")
-                binding.btnAddPhoto.text = getString(R.string.make_photo)
-            }
-            else {
-                if (binding.etPhoneNumber.text.toString() == "" || binding.etNameContact.text.toString() == "") {
-                    binding.lyNameContact.apply {
-                        helperText = getString(R.string.require)
-                        setHelperTextColor(getColorStateList(R.color.red))
-                    }
-
-                    binding.lyPhoneNumber.apply {
-                        helperText = getString(R.string.require)
-                        setHelperTextColor(getColorStateList(R.color.red))
-                    }
-                } else {
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    var fileImage: File? = null
-                    try {
-                        fileImage = createImage()
-                    } catch (exc: IOException) {
-                        println("ha ocurrido un error")
-                        Log.e("error", exc.toString())
-                    }
-
-                    if (fileImage != null) {
-                        val photoUri = FileProvider.getUriForFile(
-                            this,
-                            BuildConfig.APPLICATION_ID + ".fileprovider", fileImage
-                        )
-                        println("ZZZZZZZZZZZZZZZZZZZZZZZ")
-                        println(photoUri)
-
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-                        startForResult.launch(intent)
-                    }
-                }
+            if (binding.lyNameContact.visibility == View.VISIBLE){
+                addManualContact()
+            }else{
+                selectionMode()
             }
         }
     }
 
+    private fun selectionMode() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.apply {
+            setTitle("¿Desea importar contactos o registrar nuevo contacto manualmente?")
+            setPositiveButton(R.string.importar) { _, _ ->
+                importContacts()
+            }
+            setNegativeButton(R.string.manual) { _, _ ->
+                manualFill()
+            }
+        }
+        builder.show()
+    }
+
+    private fun addManualContact(){
+        if (binding.etPhoneNumber.text.toString() == "" || binding.etNameContact.text.toString() == "") {
+            binding.lyNameContact.apply {
+                helperText = getString(R.string.require)
+                setHelperTextColor(getColorStateList(R.color.red))
+            }
+
+            binding.lyPhoneNumber.apply {
+                helperText = getString(R.string.require)
+                setHelperTextColor(getColorStateList(R.color.red))
+            }
+        } else {
+            tomarFoto()
+        }
+    }
+
+    private fun manualFill() {
+        binding.lyNameContact.visibility = View.VISIBLE
+        binding.lyPhoneNumber.visibility = View.VISIBLE
+        binding.etNameContact.setText("")
+        binding.etPhoneNumber.setText("")
+        binding.btnAddPhoto.text = getString(R.string.make_photo)
+
+    }
+
+    private fun importContacts() {
+        Toast.makeText(this,"IMPORTANDO CONTACTOS",Toast.LENGTH_LONG).show()
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE
+        startForResultContacts.launch(intent)
+    }
 
     private fun getPhotosData() {
         if (files.listFiles()?.isNotEmpty() == true) {
@@ -132,6 +144,77 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private val startForResultContacts = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if (it.resultCode == Activity.RESULT_OK){
+            println("1111111111111111111111111")
+            println("1111111111111111111111111")
+            val data = it.data?.data
+            val cursor: Cursor? = contentResolver.query(data!!,null,null,null,null)
+
+            if (cursor != null) {
+                if (cursor.moveToFirst()){
+                    println(">>>>>>>>>>>>>>>>>>>>>>>>")
+                    println(">>>>>>>>>>>>>>>>>>>>>>>>")
+                    val columnName = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                    val columnNumber = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                    nameContact = cursor.getString(columnName)
+                    phoneNumber= cursor.getString(columnNumber)
+                    printData()
+
+                    println(nameContact)
+                    println(phoneNumber)
+                }
+            }
+            else{
+                println("El cursor es vacio")
+                println("<<<<<<<<<<<<<<<<<<<")
+            }
+        }
+    }
+
+    private fun printData() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.apply {
+            setTitle("¿Esta seguro de agregar a $nameContact?")
+            setPositiveButton(R.string.yes) { _, _ ->
+                binding.lyNameContact.visibility = View.VISIBLE
+                binding.lyPhoneNumber.visibility = View.VISIBLE
+                binding.etNameContact.setText(nameContact)
+                binding.etPhoneNumber.setText(phoneNumber.replace("+51 ","").replace(" ",""))
+                binding.btnAddPhoto.text = getString(R.string.make_photo)
+            }
+            setNegativeButton(R.string.regresar) { _, _ ->
+                importContacts()
+            }
+
+        }
+        builder.show()
+    }
+
+    private fun tomarFoto() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        var fileImage: File? = null
+        try {
+            fileImage = createImage()
+        } catch (exc: IOException) {
+            println("ha ocurrido un error")
+            Log.e("error", exc.toString())
+        }
+
+        if (fileImage != null) {
+            val photoUri = FileProvider.getUriForFile(
+                this,
+                BuildConfig.APPLICATION_ID + ".fileprovider", fileImage
+            )
+            println("ZZZZZZZZZZZZZZZZZZZZZZZ")
+            println(photoUri)
+
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+            startForResult.launch(intent)
+        }
+    }
+
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             println("vista visible")
@@ -152,6 +235,9 @@ class MainActivity : AppCompatActivity() {
                 binding.lyPhoneNumber.visibility = View.GONE
                 binding.btnAddPhoto.text = getString(R.string.add_contact)
 
+            }
+            else{
+                File(pahtToContact).delete()
             }
 
         }

@@ -9,4 +9,10 @@
     <string name="cancel">Cancelar</string>
     <string name="make_photo">Tomar foto</string>
     <string name="empty_contacts">Aun no tienes contactos, agrega uno  para continuar</string>
+    <string name="importar">Importar</string>
+    <string name="manual">Manual</string>
+    <string name="regresar">Regresar</string>
+    <string name="delete">Delete</string>
+    <string name="image_contact">Imagen del contacto</string>
+
 </resources>
